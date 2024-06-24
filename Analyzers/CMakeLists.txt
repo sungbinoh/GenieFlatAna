@@ -20,7 +20,7 @@ set_target_properties(Analyzers PROPERTIES
   LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
 )
 
-include_directories(${CMAKE_SOURCE_DIR})
+#include_directories(${CMAKE_SOURCE_DIR})
 
 # Link the library with dir1_lib and dir3_lib
 #target_link_libraries(Analyzers PRIVATE AnalyzerTools DataFormats ${ROOT_LIBRARIES})

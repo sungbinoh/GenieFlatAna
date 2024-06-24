@@ -6,12 +6,18 @@
 #include "TMath.h"
 #include "TH3.h"
 #include "TH2D.h"
+#include "TH1.h"
+#include "TF1.h"
+#include "TGraphErrors.h"
 #include <sstream>
 #include "TRandom.h"
+#include "TProfile.h"
+#include "TRandom3.h"
+#include "TFitResult.h"
 
 #include "GenieFlatTree.h"
-#include "DataFormats/Event.h"
-#include "DataFormats/Particle.h"
+#include "../DataFormats/Event.h"
+#include "../DataFormats/Particle.h"
 
 class AnalyzerCore {
 
@@ -39,7 +45,7 @@ public:
   // Read Tree
   //==================
   virtual void SetTreeName(){
-    TString tname = "/events";
+    TString tname = "events";
     fChain = new TChain(tname);
   }
 
@@ -79,10 +85,15 @@ public:
   //==================
   Event GetEvent();
   std::vector<Particle> GetAllParticles();
+  std::vector<Particle> GetAllOutProtons(const vector<Particle>& in);
+  std::vector<Particle>	GetAllOutNeutrons(const vector<Particle>& in);
+  std::vector<Particle>	GetOutProtons(const vector<Particle>& in, double ke_threshold = 0.05);
+  std::vector<Particle> GetOutNeutrons(const vector<Particle>& in, double ke_threshold = 0.05);
   
   //==================
   // AnalyzerTools
   //==================
+  void initializeAnalyzerTools();
 
   //==================
   // Additional Functions
@@ -149,6 +160,6 @@ public:
   void SwitchToTempDir();
   TFile *outfile;
   void SetOutfilePath(TString outname);
-}
+};
 
 #endif

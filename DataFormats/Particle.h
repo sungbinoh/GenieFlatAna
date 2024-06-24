@@ -31,20 +31,20 @@ public:
   void Set_par_Vz(double i_par_Vz);
   void Set_par_Vt(double i_par_Vt);
 
-  inline int pdg() const { return j_par_pdg};
-  inline int first_mother() const { return j_par_1st_mother};
-  inline int last_mother() const { return j_par_last_mother};
-  inline int first_daughter() const { return j_par_1st_daughter};
-  inline int last_daughter() const { return j_par_last_daughter};
-  inline double px() const { return j_par_px};
-  inline double	py() const { return j_par_py};
-  inline double	pz() const { return j_par_pz};
-  inline double	E() const { return j_par_E};
-  inline double	M() const { return j_par_M};
-  inline double	Vx() const { return j_par_Vx};
-  inline double Vy() const { return j_par_Vy};
-  inline double Vz() const { return j_par_Vz};
-  inline double Vt() const { return j_par_Vt};
+  inline int pdg() const { return j_par_pdg; }
+  inline int first_mother() const { return j_par_1st_mother; }
+  inline int last_mother() const { return j_par_last_mother; }
+  inline int first_daughter() const { return j_par_1st_daughter; }
+  inline int last_daughter() const { return j_par_last_daughter; }
+  inline double px() const { return j_par_px; }
+  inline double	py() const { return j_par_py; }
+  inline double	pz() const { return j_par_pz; }
+  inline double	E() const { return j_par_E; }
+  inline double	M() const { return j_par_M; }
+  inline double	Vx() const { return j_par_Vx; }
+  inline double Vy() const { return j_par_Vy; }
+  inline double Vz() const { return j_par_Vz; }
+  inline double Vt() const { return j_par_Vt; }
 
 private:
   bool j_IsEmpty;

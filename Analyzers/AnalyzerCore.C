@@ -57,7 +57,6 @@ void AnalyzerCore::Loop(){
   cout << "[AnalyzerCore::Loop] NSkipEvent = " << NSkipEvent << endl;
   cout << "[AnalyzerCore::Loop] LogEvery = " << LogEvery << endl;
   cout << "[AnalyzerCore::Loop] MCSample = " << MCSample << endl;
-  cout << "[AnalyzerCore::Loop] Beam_Momentum = " << Beam_Momentum << endl;
   cout << "[AnalyzerCore::Loop] Userflags = {" << endl;
   for(unsigned int i=0; i<Userflags.size(); i++){
     cout << "[AnalyzerCore::Loop]   \"" << Userflags.at(i) << "\"," << endl;
@@ -123,26 +122,88 @@ std::vector<Particle> AnalyzerCore::GetAllParticles(){
   vector<Particle> out;
 
   for (size_t i = 0; i < evt.par_pdg->size(); i++){
-    if((*evt.par_pdg)[i].empty()) continue;
+    //if((*evt.par_pdg)[i].empty()) continue;
 
     Particle this_Particle;
     this_Particle.SetIsEmpty(false);
-    Particle.Set_par_pdg((*evt.par_pdg).at(i));
-    Particle.Set_par_1st_mother((*evt.par_1st_mother).at(i));
-    Particle.Set_par_last_mother((*evt.par_last_mother).at(i));
-    Particle.Set_par_1st_daughter((*evt.par_1st_daughter).at(i));
-    Particle.Set_par_last_daughter((*evt.par_last_daughter).at(i));
-    Particle.Set_par_px((*evt.par_px).at(i));
-    Particle.Set_par_py((*evt.par_py).at(i));
-    Particle.Set_par_pz((*evt.par_pz).at(i));
-    Particle.Set_par_E((*evt.par_E).at(i));
-    Particle.Set_par_M((*evt.par_M).at(i));
-    Particle.Set_par_Vx((*evt.par_Vx).at(i));
-    Particle.Set_par_Vy((*evt.par_Vy).at(i));
-    Particle.Set_par_Vz((*evt.par_Vz).at(i));
-    Particle.Set_par_Vt((*evt.par_Vt).at(i));
+    this_Particle.Set_par_pdg((*evt.par_pdg).at(i));
+    this_Particle.Set_par_1st_mother((*evt.par_1st_mother).at(i));
+    this_Particle.Set_par_last_mother((*evt.par_last_mother).at(i));
+    this_Particle.Set_par_1st_daughter((*evt.par_1st_daughter).at(i));
+    this_Particle.Set_par_last_daughter((*evt.par_last_daughter).at(i));
+    this_Particle.Set_par_px((*evt.par_px).at(i));
+    this_Particle.Set_par_py((*evt.par_py).at(i));
+    this_Particle.Set_par_pz((*evt.par_pz).at(i));
+    this_Particle.Set_par_E((*evt.par_E).at(i));
+    this_Particle.Set_par_M((*evt.par_M).at(i));
+    this_Particle.Set_par_Vx((*evt.par_Vx).at(i));
+    this_Particle.Set_par_Vy((*evt.par_Vy).at(i));
+    this_Particle.Set_par_Vz((*evt.par_Vz).at(i));
+    this_Particle.Set_par_Vt((*evt.par_Vt).at(i));
 
     out.push_back(this_Particle);
+  }
+
+  return out;
+}
+
+std::vector<Particle> AnalyzerCore::GetAllOutProtons(const vector<Particle>& in){
+
+  vector<Particle> out;
+  if(in.size() < 3) return out;
+  
+  for(unsigned int i = 2; i < in.size(); i++){
+    Particle this_in = in.at(i);
+    if(this_in.pdg() == 2212){
+      out.push_back(this_in);
+    }
+  }
+
+  return out;
+}
+
+std::vector<Particle> AnalyzerCore::GetAllOutNeutrons(const vector<Particle>& in){
+
+  vector<Particle> out;
+  if(in.size() < 3) return out;
+ 
+  for(unsigned int i = 2; i < in.size(); i++){
+    Particle this_in = in.at(i);
+    if(this_in.pdg() == 2112){
+      out.push_back(this_in);
+    }
+  }
+
+  return out;
+}
+
+std::vector<Particle> AnalyzerCore::GetOutProtons(const vector<Particle>& in, double ke_threshold){
+
+  vector<Particle> out;
+  if(in.size() < 3) return out;
+
+  for(unsigned int i = 2; i < in.size(); i++){
+    Particle this_in = in.at(i);
+    double this_ke = this_in.E() - this_in.M();
+    if(this_in.pdg() == 2212 && this_ke > ke_threshold){
+      out.push_back(this_in);
+    }
+  }
+
+  return out;
+}
+
+std::vector<Particle> AnalyzerCore::GetOutNeutrons(const vector<Particle>& in, double ke_threshold){
+
+  vector<Particle> out;
+  if(in.size() < 3) return out;
+
+  for(unsigned int i = 2; i < in.size(); i++){
+    Particle this_in = in.at(i);
+    double this_ke = this_in.E() - this_in.M();
+    if(this_in.pdg() == 2112 && this_ke > ke_threshold){
+      out.push_back(this_in);
+    }
   }
 
   return out;
@@ -158,6 +219,9 @@ void AnalyzerCore::initializeAnalyzerTools(){
 void AnalyzerCore::Init(){
   cout << "Let's initiallize!" << endl;
   evt.Init_GenieFlatTree(fChain);
+}
+
+void AnalyzerCore::Init_evt(){
 }
 
 //==================
@@ -461,10 +525,4 @@ void AnalyzerCore::WriteHist(){
   }
 
   outfile->cd();
-  outfile->mkdir("Fitter");
-  outfile->cd("Fitter");
-  for(std::map<TString, TGraph2D*>::iterator mapit = Fitter -> map_TGraph2D.begin(); mapit!=Fitter -> map_TGraph2D.end(); mapit++){
-    mapit->second->Write();
-  }
-
 }
