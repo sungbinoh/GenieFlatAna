@@ -127,6 +127,7 @@ std::vector<Particle> AnalyzerCore::GetAllParticles(){
     Particle this_Particle;
     this_Particle.SetIsEmpty(false);
     this_Particle.Set_par_pdg((*evt.par_pdg).at(i));
+    this_Particle.Set_par_status((*evt.par_status).at(i));
     this_Particle.Set_par_1st_mother((*evt.par_1st_mother).at(i));
     this_Particle.Set_par_last_mother((*evt.par_last_mother).at(i));
     this_Particle.Set_par_1st_daughter((*evt.par_1st_daughter).at(i));

@@ -17,6 +17,7 @@ public:
 
   // == Variables
   void Set_par_pdg(int i_par_pdg);
+  void Set_par_status(int i_par_status);
   void Set_par_1st_mother(int i_par_1st_mother);
   void Set_par_last_mother(int i_par_last_mother);
   void Set_par_1st_daughter(int i_par_1st_daughter);
@@ -32,6 +33,7 @@ public:
   void Set_par_Vt(double i_par_Vt);
 
   inline int pdg() const { return j_par_pdg; }
+  inline int status() const { return j_par_status; }
   inline int first_mother() const { return j_par_1st_mother; }
   inline int last_mother() const { return j_par_last_mother; }
   inline int first_daughter() const { return j_par_1st_daughter; }
@@ -50,6 +52,7 @@ private:
   bool j_IsEmpty;
 
   int j_par_pdg;
+  int j_par_status;
   int j_par_1st_mother;
   int j_par_last_mother;
   int j_par_1st_daughter;

@@ -17,6 +17,7 @@ void GenieFlatTree::Init_GenieFlatTree(TChain *ch)
   fsi_pdgs = 0;
   fsi_codes = 0;
   par_pdg = 0;
+  par_status = 0;
   par_1st_mother = 0;
   par_last_mother = 0;
   par_1st_daughter = 0;
@@ -63,6 +64,7 @@ void GenieFlatTree::Init_GenieFlatTree(TChain *ch)
   ch->SetBranchAddress("fsi_pdgs", &fsi_pdgs, &b_fsi_pdgs);
   ch->SetBranchAddress("fsi_codes", &fsi_codes, &b_fsi_codes);
   ch->SetBranchAddress("par_pdg", &par_pdg, &b_par_pdg);
+  ch->SetBranchAddress("par_status", &par_status, &b_par_status);
   ch->SetBranchAddress("par_1st_mother", &par_1st_mother, &b_par_1st_mother);
   ch->SetBranchAddress("par_last_mother", &par_last_mother, &b_par_last_mother);
   ch->SetBranchAddress("par_1st_daughter", &par_1st_daughter, &b_par_1st_daughter);

@@ -55,6 +55,7 @@ public :
   vector<int>     *fsi_pdgs;
   vector<int>     *fsi_codes;
   vector<int>     *par_pdg;
+  vector<int>     *par_status;
   vector<int>     *par_1st_mother;
   vector<int>     *par_last_mother;
   vector<int>     *par_1st_daughter;
@@ -138,6 +139,7 @@ public :
   TBranch        *b_fsi_pdgs;   //!
   TBranch        *b_fsi_codes;   //!
   TBranch        *b_par_pdg;   //!
+  TBranch        *b_par_status;   //!
   TBranch        *b_par_1st_mother;   //!
   TBranch        *b_par_last_mother;   //!
   TBranch        *b_par_1st_daughter;   //!

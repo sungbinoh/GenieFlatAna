@@ -4,6 +4,7 @@ Particle::Particle(){
 
   j_IsEmpty = true;
   j_par_pdg = -9999;
+  j_par_status = -9999;
   j_par_1st_mother = -1;
   j_par_last_mother = -1;
   j_par_1st_daughter = -1;
@@ -23,6 +24,7 @@ Particle::~Particle(){}
 
 void Particle::SetIsEmpty(bool i_IsEmpty){ j_IsEmpty = i_IsEmpty; }
 void Particle::Set_par_pdg(int i_par_pdg){ j_par_pdg = i_par_pdg; }
+void Particle::Set_par_status(int i_par_status){ j_par_status = i_par_status; }
 void Particle::Set_par_1st_mother(int i_par_1st_mother){ j_par_1st_mother = i_par_1st_mother; }
 void Particle::Set_par_last_mother(int i_par_last_mother){ j_par_last_mother = i_par_last_mother; }
 void Particle::Set_par_1st_daughter(int i_par_1st_daughter){ j_par_1st_daughter = i_par_1st_daughter; }
